@@ -3,15 +3,17 @@ using System;
 using ContactsDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ContactsDataAccess.Migrations
 {
     [DbContext(typeof(ContactsContext))]
-    partial class ContactsContextModelSnapshot : ModelSnapshot
+    [Migration("20210616222259_adress_table")]
+    partial class adress_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,8 +48,6 @@ namespace ContactsDataAccess.Migrations
                     b.HasIndex("PersonId");
 
                     b.ToTable("Adresses");
-
-                    
                 });
 
             modelBuilder.Entity("ContactsDataAccess.Model.Person", b =>
@@ -81,8 +81,7 @@ namespace ContactsDataAccess.Migrations
                 {
                     b.HasOne("ContactsDataAccess.Model.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PersonId");
 
                     b.Navigation("Person");
                 });
